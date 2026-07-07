@@ -151,26 +151,6 @@
     background:linear-gradient(0deg, rgba(2,27,51,.85), transparent);
     color:#fff; padding:30px 26px 20px; font-weight:700; font-size:16px;
   }
-  .gallery-arrow{
-    position:absolute; top:50%; transform:translateY(-50%); z-index:5;
-    width:46px; height:46px; border-radius:50%; border:none; cursor:pointer;
-    background:rgba(255,255,255,.92); color:var(--blue-deep);
-    display:flex; align-items:center; justify-content:center;
-    box-shadow:0 8px 22px rgba(2,27,51,.3); transition:.2s;
-  }
-  .gallery-arrow:hover{ background:var(--gold); }
-  .gallery-arrow.prev{ left:14px; }
-  .gallery-arrow.next{ right:14px; }
-  .gallery-arrow svg{ width:20px; height:20px; }
-  .gallery-thumbs{
-    display:flex; gap:12px; margin-top:18px; overflow-x:auto; padding-bottom:4px;
-  }
-  .gallery-thumbs img{
-    width:88px; height:66px; object-fit:cover; border-radius:10px; cursor:pointer;
-    opacity:.55; border:2px solid transparent; transition:.2s; flex:none;
-  }
-  .gallery-thumbs img.active{ opacity:1; border-color:var(--blue); }
-  .gallery-thumbs img:hover{ opacity:1; }
 
   /* ---------- zone ---------- */
   .zone{ background:var(--cloud); }
@@ -347,25 +327,12 @@
   </div>
   <div class="gallery-wrap">
     <div class="gallery-stage" id="galleryStage">
-      <img src="images/lavage-porsche.png" class="active" alt="Lavage carrosserie à la main sur une Porsche">
-      <img src="images/produits-pro.png" alt="Produits professionnels Co Clean Car face au port">
-      <img src="images/interieur-detailing.png" alt="Nettoyage détaillé de l'intérieur d'un véhicule">
-      <img src="images/van-co-clean-car.png" alt="Véhicule utilitaire Co Clean Car équipé pour le lavage à domicile">
-      <img src="images/jante-nettoyage.png" alt="Nettoyage minutieux d'une jante">
+      <img src="lavage-porsche.png" class="active" alt="Lavage carrosserie à la main sur une Porsche">
+      <img src="produits-pro.png" alt="Produits professionnels Co Clean Car face au port">
+      <img src="interieur-detailing.png" alt="Nettoyage détaillé de l'intérieur d'un véhicule">
+      <img src="van-co-clean-car.png" alt="Véhicule utilitaire Co Clean Car équipé pour le lavage à domicile">
+      <img src="jante-nettoyage.png" alt="Nettoyage minutieux d'une jante">
       <div class="gallery-caption" id="galleryCaption">Lavage carrosserie à la main</div>
-      <button class="gallery-arrow prev" id="galleryPrev" aria-label="Image précédente">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M15 18l-6-6 6-6"/></svg>
-      </button>
-      <button class="gallery-arrow next" id="galleryNext" aria-label="Image suivante">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M9 18l6-6-6-6"/></svg>
-      </button>
-    </div>
-    <div class="gallery-thumbs" id="galleryThumbs">
-      <img src="images/lavage-porsche.png" class="active" alt="">
-      <img src="images/produits-pro.png" alt="">
-      <img src="images/interieur-detailing.png" alt="">
-      <img src="images/van-co-clean-car.png" alt="">
-      <img src="images/jante-nettoyage.png" alt="">
     </div>
   </div>
 </section>
@@ -586,22 +553,15 @@
     'Nettoyage minutieux des jantes'
   ];
   const stageImgs = document.querySelectorAll('#galleryStage img');
-  const thumbImgs = document.querySelectorAll('#galleryThumbs img');
   const galleryCaption = document.getElementById('galleryCaption');
   let gIndex = 0;
   function showGallery(i){
     stageImgs[gIndex].classList.remove('active');
-    thumbImgs[gIndex].classList.remove('active');
     gIndex = (i + stageImgs.length) % stageImgs.length;
     stageImgs[gIndex].classList.add('active');
-    thumbImgs[gIndex].classList.add('active');
     galleryCaption.textContent = captions[gIndex];
   }
-  document.getElementById('galleryNext').addEventListener('click', () => { showGallery(gIndex+1); resetGalleryAuto(); });
-  document.getElementById('galleryPrev').addEventListener('click', () => { showGallery(gIndex-1); resetGalleryAuto(); });
-  thumbImgs.forEach((t,i) => t.addEventListener('click', () => { showGallery(i); resetGalleryAuto(); }));
-  let galleryAuto = setInterval(()=> showGallery(gIndex+1), 4800);
-  function resetGalleryAuto(){ clearInterval(galleryAuto); galleryAuto = setInterval(()=> showGallery(gIndex+1), 4800); }
+  setInterval(()=> showGallery(gIndex+1), 3000);
 
   document.getElementById('year').textContent = new Date().getFullYear();
 </script>
